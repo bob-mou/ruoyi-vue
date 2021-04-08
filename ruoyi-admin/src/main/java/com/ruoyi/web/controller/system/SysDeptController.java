@@ -22,11 +22,11 @@ import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.service.ISysDeptService;
+import com.ruoyi.service.service.ISysDeptService;
 
 /**
  * 部门信息
- * 
+ *
  * @author ruoyi
  */
 @RestController

@@ -28,13 +28,13 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.service.TokenService;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.service.service.ISysPostService;
+import com.ruoyi.service.service.ISysRoleService;
+import com.ruoyi.service.service.ISysUserService;
 
 /**
  * 用户信息
- * 
+ *
  * @author ruoyi
  */
 @RestController

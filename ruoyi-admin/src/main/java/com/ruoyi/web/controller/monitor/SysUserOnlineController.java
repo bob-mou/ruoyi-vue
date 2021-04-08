@@ -20,12 +20,12 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.service.domain.SysUserOnline;
+import com.ruoyi.service.service.ISysUserOnlineService;
 
 /**
  * 在线用户监控
- * 
+ *
  * @author ruoyi
  */
 @RestController

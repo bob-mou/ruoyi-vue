@@ -22,12 +22,12 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.service.ISysDictDataService;
-import com.ruoyi.system.service.ISysDictTypeService;
+import com.ruoyi.service.service.ISysDictDataService;
+import com.ruoyi.service.service.ISysDictTypeService;
 
 /**
  * 数据字典信息
- * 
+ *
  * @author ruoyi
  */
 @RestController

@@ -21,12 +21,12 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.domain.SysConfig;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.service.domain.SysConfig;
+import com.ruoyi.service.service.ISysConfigService;
 
 /**
  * 参数配置 信息操作处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
