@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 选题类别管理对象 project_type
- *
+ * 
  * @author zhouq
  * @date 2021-04-08
  */
@@ -40,58 +40,60 @@ public class ProjectType extends BaseEntity
     /** 选题管理信息 */
     private List<Project> projectList;
 
-    public List<Project> getProjectList() {
-        return projectList;
-    }
-
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
-    }
-
-    public void setProjectTypeId(Long projectTypeId)
+    public void setProjectTypeId(Long projectTypeId) 
     {
         this.projectTypeId = projectTypeId;
     }
 
-    public Long getProjectTypeId()
+    public Long getProjectTypeId() 
     {
         return projectTypeId;
     }
-    public void setProjectTypeName(String projectTypeName)
+    public void setProjectTypeName(String projectTypeName) 
     {
         this.projectTypeName = projectTypeName;
     }
 
-    public String getProjectTypeName()
+    public String getProjectTypeName() 
     {
         return projectTypeName;
     }
-    public void setCreateDate(Date createDate)
+    public void setCreateDate(Date createDate) 
     {
         this.createDate = createDate;
     }
 
-    public Date getCreateDate()
+    public Date getCreateDate() 
     {
         return createDate;
     }
-    public void setState(Long state)
+    public void setState(Long state) 
     {
         this.state = state;
     }
 
-    public Long getState()
+    public Long getState() 
     {
         return state;
     }
-    public void setRemarks(String remarks)
+    public void setRemarks(String remarks) 
     {
         this.remarks = remarks;
     }
 
-    public String getRemarks()
+    public String getRemarks() 
     {
         return remarks;
+    }
+
+    public List<Project> getProjectList()
+    {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList)
+    {
+        this.projectList = projectList;
     }
 
     @Override

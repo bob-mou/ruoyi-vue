@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 选题管理对象 project
- *
+ * 
  * @author zhouq
  * @date 2021-04-08
  */
@@ -49,75 +49,75 @@ public class Project extends BaseEntity
     @Excel(name = "备注")
     private String remarks;
 
-    public void setProjectId(Long projectId)
+    public void setProjectId(Long projectId) 
     {
         this.projectId = projectId;
     }
 
-    public Long getProjectId()
+    public Long getProjectId() 
     {
         return projectId;
     }
-    public void setProjectTypeId(Long projectTypeId)
+    public void setProjectTypeId(Long projectTypeId) 
     {
         this.projectTypeId = projectTypeId;
     }
 
-    public Long getProjectTypeId()
+    public Long getProjectTypeId() 
     {
         return projectTypeId;
     }
-    public void setProjectName(Long projectName)
+    public void setProjectName(Long projectName) 
     {
         this.projectName = projectName;
     }
 
-    public Long getProjectName()
+    public Long getProjectName() 
     {
         return projectName;
     }
-    public void setProjectDetail(String projectDetail)
+    public void setProjectDetail(String projectDetail) 
     {
         this.projectDetail = projectDetail;
     }
 
-    public String getProjectDetail()
+    public String getProjectDetail() 
     {
         return projectDetail;
     }
-    public void setProjectTech(String projectTech)
+    public void setProjectTech(String projectTech) 
     {
         this.projectTech = projectTech;
     }
 
-    public String getProjectTech()
+    public String getProjectTech() 
     {
         return projectTech;
     }
-    public void setCreateDate(Date createDate)
+    public void setCreateDate(Date createDate) 
     {
         this.createDate = createDate;
     }
 
-    public Date getCreateDate()
+    public Date getCreateDate() 
     {
         return createDate;
     }
-    public void setState(Long state)
+    public void setState(Long state) 
     {
         this.state = state;
     }
 
-    public Long getState()
+    public Long getState() 
     {
         return state;
     }
-    public void setRemarks(String remarks)
+    public void setRemarks(String remarks) 
     {
         this.remarks = remarks;
     }
 
-    public String getRemarks()
+    public String getRemarks() 
     {
         return remarks;
     }

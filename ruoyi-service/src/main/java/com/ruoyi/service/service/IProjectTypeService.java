@@ -5,15 +5,15 @@ import com.ruoyi.service.domain.ProjectType;
 
 /**
  * 选题类别管理Service接口
- *
+ * 
  * @author zhouq
  * @date 2021-04-08
  */
-public interface IProjectTypeService
+public interface IProjectTypeService 
 {
     /**
      * 查询选题类别管理
-     *
+     * 
      * @param projectTypeId 选题类别管理ID
      * @return 选题类别管理
      */
@@ -21,7 +21,7 @@ public interface IProjectTypeService
 
     /**
      * 查询选题类别管理列表
-     *
+     * 
      * @param projectType 选题类别管理
      * @return 选题类别管理集合
      */
@@ -29,7 +29,7 @@ public interface IProjectTypeService
 
     /**
      * 新增选题类别管理
-     *
+     * 
      * @param projectType 选题类别管理
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IProjectTypeService
 
     /**
      * 修改选题类别管理
-     *
+     * 
      * @param projectType 选题类别管理
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IProjectTypeService
 
     /**
      * 批量删除选题类别管理
-     *
+     * 
      * @param projectTypeIds 需要删除的选题类别管理ID
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface IProjectTypeService
 
     /**
      * 删除选题类别管理信息
-     *
+     * 
      * @param projectTypeId 选题类别管理ID
      * @return 结果
      */
