@@ -1,6 +1,5 @@
 package com.ruoyi.service.domain;
 
-import java.util.List;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -9,45 +8,56 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 选题类别管理对象 project_type
+ * 选题管理对象 project
  *
  * @author zhouq
  * @date 2021-04-08
  */
-public class ProjectType extends BaseEntity
+public class Project extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 选题类型ID */
+    /** 选题id */
+    private Long projectId;
+
+    /** 外键选题类型ID */
+    @Excel(name = "外键选题类型ID")
     private Long projectTypeId;
 
-    /** 选题类型名称 */
-    @Excel(name = "选题类型名称")
-    private String projectTypeName;
+    /** 选题名称 */
+    @Excel(name = "选题名称")
+    private Long projectName;
+
+    /** 选题简介 */
+    @Excel(name = "选题简介")
+    private String projectDetail;
+
+    /** 涉及技术 */
+    @Excel(name = "涉及技术")
+    private String projectTech;
 
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date createDate;
 
-    /** 选题类型状态 */
-    @Excel(name = "选题类型状态")
+    /** 选题状态 */
+    @Excel(name = "选题状态")
     private Long state;
 
     /** 备注 */
+    @Excel(name = "备注")
     private String remarks;
 
-    /** 选题管理信息 */
-    private List<Project> projectList;
-
-    public List<Project> getProjectList() {
-        return projectList;
+    public void setProjectId(Long projectId)
+    {
+        this.projectId = projectId;
     }
 
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
+    public Long getProjectId()
+    {
+        return projectId;
     }
-
     public void setProjectTypeId(Long projectTypeId)
     {
         this.projectTypeId = projectTypeId;
@@ -57,14 +67,32 @@ public class ProjectType extends BaseEntity
     {
         return projectTypeId;
     }
-    public void setProjectTypeName(String projectTypeName)
+    public void setProjectName(Long projectName)
     {
-        this.projectTypeName = projectTypeName;
+        this.projectName = projectName;
     }
 
-    public String getProjectTypeName()
+    public Long getProjectName()
     {
-        return projectTypeName;
+        return projectName;
+    }
+    public void setProjectDetail(String projectDetail)
+    {
+        this.projectDetail = projectDetail;
+    }
+
+    public String getProjectDetail()
+    {
+        return projectDetail;
+    }
+    public void setProjectTech(String projectTech)
+    {
+        this.projectTech = projectTech;
+    }
+
+    public String getProjectTech()
+    {
+        return projectTech;
     }
     public void setCreateDate(Date createDate)
     {
@@ -97,12 +125,14 @@ public class ProjectType extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("projectId", getProjectId())
             .append("projectTypeId", getProjectTypeId())
-            .append("projectTypeName", getProjectTypeName())
+            .append("projectName", getProjectName())
+            .append("projectDetail", getProjectDetail())
+            .append("projectTech", getProjectTech())
             .append("createDate", getCreateDate())
             .append("state", getState())
             .append("remarks", getRemarks())
-            .append("projectList", getProjectList())
             .toString();
     }
 }
