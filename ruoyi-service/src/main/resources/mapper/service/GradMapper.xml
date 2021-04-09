@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.service.mapper.GradMapper">
+    
+    <resultMap type="Grad" id="GradResult">
+        <result property="stuId"    column="stu_id"    />
+        <result property="classId"    column="class_id"    />
+        <result property="majorId"    column="major_id"    />
+        <result property="collegeId"    column="college_id"    />
+        <result property="universityId"    column="university_id"    />
+        <result property="undergraduateSchool"    column="undergraduate_school"    />
+        <result property="undergraduateSchoolType"    column="undergraduate_school_type"    />
+        <result property="undergraduateMajor"    column="undergraduate_major"    />
+        <result property="graduationProjectTitle"    column="graduation_project_title"    />
+        <result property="graduationProjectDetail"    column="graduation_project_detail"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="state"    column="state"    />
+        <result property="remarks"    column="remarks"    />
+    </resultMap>
+
+    <sql id="selectGradVo">
+        select stu_id, class_id, major_id, college_id, university_id, undergraduate_school, undergraduate_school_type, undergraduate_major, graduation_project_title, graduation_project_detail, create_time, state, remarks from grad
+    </sql>
+
+    <select id="selectGradList" parameterType="Grad" resultMap="GradResult">
+        <include refid="selectGradVo"/>
+        <where>  
+            <if test="universityId != null "> and university_id = #{universityId}</if>
+            <if test="graduationProjectTitle != null  and graduationProjectTitle != ''"> and graduation_project_title = #{graduationProjectTitle}</if>
+            <if test="graduationProjectDetail != null  and graduationProjectDetail != ''"> and graduation_project_detail = #{graduationProjectDetail}</if>
+            <if test="state != null "> and state = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectGradById" parameterType="Long" resultMap="GradResult">
+        <include refid="selectGradVo"/>
+        where stu_id = #{stuId}
+    </select>
+        
+    <insert id="insertGrad" parameterType="Grad" useGeneratedKeys="true" keyProperty="stuId">
+        insert into grad
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="classId != null">class_id,</if>
+            <if test="majorId != null">major_id,</if>
+            <if test="collegeId != null">college_id,</if>
+            <if test="universityId != null">university_id,</if>
+            <if test="undergraduateSchool != null and undergraduateSchool != ''">undergraduate_school,</if>
+            <if test="undergraduateSchoolType != null and undergraduateSchoolType != ''">undergraduate_school_type,</if>
+            <if test="undergraduateMajor != null and undergraduateMajor != ''">undergraduate_major,</if>
+            <if test="graduationProjectTitle != null and graduationProjectTitle != ''">graduation_project_title,</if>
+            <if test="graduationProjectDetail != null and graduationProjectDetail != ''">graduation_project_detail,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="state != null">state,</if>
+            <if test="remarks != null">remarks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="classId != null">#{classId},</if>
+            <if test="majorId != null">#{majorId},</if>
+            <if test="collegeId != null">#{collegeId},</if>
+            <if test="universityId != null">#{universityId},</if>
+            <if test="undergraduateSchool != null and undergraduateSchool != ''">#{undergraduateSchool},</if>
+            <if test="undergraduateSchoolType != null and undergraduateSchoolType != ''">#{undergraduateSchoolType},</if>
+            <if test="undergraduateMajor != null and undergraduateMajor != ''">#{undergraduateMajor},</if>
+            <if test="graduationProjectTitle != null and graduationProjectTitle != ''">#{graduationProjectTitle},</if>
+            <if test="graduationProjectDetail != null and graduationProjectDetail != ''">#{graduationProjectDetail},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="state != null">#{state},</if>
+            <if test="remarks != null">#{remarks},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGrad" parameterType="Grad">
+        update grad
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="classId != null">class_id = #{classId},</if>
+            <if test="majorId != null">major_id = #{majorId},</if>
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+            <if test="universityId != null">university_id = #{universityId},</if>
+            <if test="undergraduateSchool != null and undergraduateSchool != ''">undergraduate_school = #{undergraduateSchool},</if>
+            <if test="undergraduateSchoolType != null and undergraduateSchoolType != ''">undergraduate_school_type = #{undergraduateSchoolType},</if>
+            <if test="undergraduateMajor != null and undergraduateMajor != ''">undergraduate_major = #{undergraduateMajor},</if>
+            <if test="graduationProjectTitle != null and graduationProjectTitle != ''">graduation_project_title = #{graduationProjectTitle},</if>
+            <if test="graduationProjectDetail != null and graduationProjectDetail != ''">graduation_project_detail = #{graduationProjectDetail},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+        </trim>
+        where stu_id = #{stuId}
+    </update>
+
+    <delete id="deleteGradById" parameterType="Long">
+        delete from grad where stu_id = #{stuId}
+    </delete>
+
+    <delete id="deleteGradByIds" parameterType="String">
+        delete from grad where stu_id in 
+        <foreach item="stuId" collection="array" open="(" separator="," close=")">
+            #{stuId}
+        </foreach>
+    </delete>
+</mapper>
