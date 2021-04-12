@@ -6,8 +6,8 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 学生管理对象 stu
- * 
+d * 学生表对象 stu
+ *
  * @author 牟连波
  * @date 2021-04-09
  */
@@ -19,24 +19,68 @@ public class Stu extends BaseEntity
     private Long stuId;
 
     /** 学生学号 */
-    @Excel(name = "学生学号")
+    @Excel(name = "学号")
     private String stuNumber;
 
     /** 所属班级ID */
-    @Excel(name = "所属班级ID")
+    @Excel(name = "班级")
+    private String className;
+
     private Long classId;
 
     /** 所属专业ID */
-    @Excel(name = "所属专业ID")
+    @Excel(name = "专业")
+    private String majorName;
+
     private Long majorId;
 
     /** 所属学院ID */
-    @Excel(name = "所属学院ID")
+    @Excel(name = "学院")
+    private String collegeName;
+
     private Long collegeId;
 
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
     /** 所属学校ID */
-    @Excel(name = "所属学校ID")
+    @Excel(name = "学校")
+    private String universityName;
+
     private Long universityId;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getMajorName() {
+        return majorName;
+    }
+
+    public void setMajorName(String majorName) {
+        this.majorName = majorName;
+    }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
 
     /** 学校类型 */
     @Excel(name = "学校类型")
@@ -78,147 +122,147 @@ public class Stu extends BaseEntity
     @Excel(name = "备注")
     private String remarks;
 
-    public void setStuId(Long stuId) 
+    public void setStuId(Long stuId)
     {
         this.stuId = stuId;
     }
 
-    public Long getStuId() 
+    public Long getStuId()
     {
         return stuId;
     }
-    public void setStuNumber(String stuNumber) 
+    public void setStuNumber(String stuNumber)
     {
         this.stuNumber = stuNumber;
     }
 
-    public String getStuNumber() 
+    public String getStuNumber()
     {
         return stuNumber;
     }
-    public void setClassId(Long classId) 
+    public void setClassId(Long classId)
     {
         this.classId = classId;
     }
 
-    public Long getClassId() 
+    public Long getClassId()
     {
         return classId;
     }
-    public void setMajorId(Long majorId) 
+    public void setMajorId(Long majorId)
     {
         this.majorId = majorId;
     }
 
-    public Long getMajorId() 
+    public Long getMajorId()
     {
         return majorId;
     }
-    public void setCollegeId(Long collegeId) 
+    public void setCollegeId(Long collegeId)
     {
         this.collegeId = collegeId;
     }
 
-    public Long getCollegeId() 
+    public Long getCollegeId()
     {
         return collegeId;
     }
-    public void setUniversityId(Long universityId) 
+    public void setUniversityId(Long universityId)
     {
         this.universityId = universityId;
     }
 
-    public Long getUniversityId() 
+    public Long getUniversityId()
     {
         return universityId;
     }
-    public void setSchoolType(String schoolType) 
+    public void setSchoolType(String schoolType)
     {
         this.schoolType = schoolType;
     }
 
-    public String getSchoolType() 
+    public String getSchoolType()
     {
         return schoolType;
     }
-    public void setProjectName(String projectName) 
+    public void setProjectName(String projectName)
     {
         this.projectName = projectName;
     }
 
-    public String getProjectName() 
+    public String getProjectName()
     {
         return projectName;
     }
-    public void setProjectDetail(String projectDetail) 
+    public void setProjectDetail(String projectDetail)
     {
         this.projectDetail = projectDetail;
     }
 
-    public String getProjectDetail() 
+    public String getProjectDetail()
     {
         return projectDetail;
     }
-    public void setStuName(String stuName) 
+    public void setStuName(String stuName)
     {
         this.stuName = stuName;
     }
 
-    public String getStuName() 
+    public String getStuName()
     {
         return stuName;
     }
-    public void setStuPhone(String stuPhone) 
+    public void setStuPhone(String stuPhone)
     {
         this.stuPhone = stuPhone;
     }
 
-    public String getStuPhone() 
+    public String getStuPhone()
     {
         return stuPhone;
     }
-    public void setStuQq(String stuQq) 
+    public void setStuQq(String stuQq)
     {
         this.stuQq = stuQq;
     }
 
-    public String getStuQq() 
+    public String getStuQq()
     {
         return stuQq;
     }
-    public void setStuEmail(String stuEmail) 
+    public void setStuEmail(String stuEmail)
     {
         this.stuEmail = stuEmail;
     }
 
-    public String getStuEmail() 
+    public String getStuEmail()
     {
         return stuEmail;
     }
-    public void setStuEducation(Integer stuEducation) 
+    public void setStuEducation(Integer stuEducation)
     {
         this.stuEducation = stuEducation;
     }
 
-    public Integer getStuEducation() 
+    public Integer getStuEducation()
     {
         return stuEducation;
     }
-    public void setState(Integer state) 
+    public void setState(Integer state)
     {
         this.state = state;
     }
 
-    public Integer getState() 
+    public Integer getState()
     {
         return state;
     }
-    public void setRemarks(String remarks) 
+    public void setRemarks(String remarks)
     {
         this.remarks = remarks;
     }
 
-    public String getRemarks() 
+    public String getRemarks()
     {
         return remarks;
     }
@@ -229,12 +273,16 @@ public class Stu extends BaseEntity
             .append("stuId", getStuId())
             .append("stuNumber", getStuNumber())
             .append("classId", getClassId())
+            .append("className",getClassName())
             .append("majorId", getMajorId())
+            .append("majorName",getMajorName())
             .append("collegeId", getCollegeId())
+            .append("collegeName",getCollegeName())
             .append("universityId", getUniversityId())
             .append("schoolType", getSchoolType())
             .append("projectName", getProjectName())
             .append("projectDetail", getProjectDetail())
+            .append("universityName",getUniversityName())
             .append("stuName", getStuName())
             .append("stuPhone", getStuPhone())
             .append("stuQq", getStuQq())
