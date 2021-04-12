@@ -21,7 +21,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 学生表Controller
+ * 学生管理Controller
  * 
  * @author 牟连波
  * @date 2021-04-09
@@ -34,7 +34,7 @@ public class StuController extends BaseController
     private IStuService stuService;
 
     /**
-     * 查询学生表列表
+     * 查询学生管理列表
      */
     @PreAuthorize("@ss.hasPermi('service:stu:list')")
     @GetMapping("/list")
@@ -46,10 +46,10 @@ public class StuController extends BaseController
     }
 
     /**
-     * 导出学生表列表
+     * 导出学生管理列表
      */
     @PreAuthorize("@ss.hasPermi('service:stu:export')")
-    @Log(title = "学生表", businessType = BusinessType.EXPORT)
+    @Log(title = "学生管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(Stu stu)
     {
@@ -59,7 +59,7 @@ public class StuController extends BaseController
     }
 
     /**
-     * 获取学生表详细信息
+     * 获取学生管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('service:stu:query')")
     @GetMapping(value = "/{stuId}")
@@ -69,10 +69,10 @@ public class StuController extends BaseController
     }
 
     /**
-     * 新增学生表
+     * 新增学生管理
      */
     @PreAuthorize("@ss.hasPermi('service:stu:add')")
-    @Log(title = "学生表", businessType = BusinessType.INSERT)
+    @Log(title = "学生管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Stu stu)
     {
@@ -80,10 +80,10 @@ public class StuController extends BaseController
     }
 
     /**
-     * 修改学生表
+     * 修改学生管理
      */
     @PreAuthorize("@ss.hasPermi('service:stu:edit')")
-    @Log(title = "学生表", businessType = BusinessType.UPDATE)
+    @Log(title = "学生管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Stu stu)
     {
@@ -91,10 +91,10 @@ public class StuController extends BaseController
     }
 
     /**
-     * 删除学生表
+     * 删除学生管理
      */
     @PreAuthorize("@ss.hasPermi('service:stu:remove')")
-    @Log(title = "学生表", businessType = BusinessType.DELETE)
+    @Log(title = "学生管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{stuIds}")
     public AjaxResult remove(@PathVariable Long[] stuIds)
     {

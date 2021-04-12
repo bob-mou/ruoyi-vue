@@ -9,7 +9,7 @@ import com.ruoyi.service.domain.Stu;
 import com.ruoyi.service.service.IStuService;
 
 /**
- * 学生表Service业务层处理
+ * 学生管理Service业务层处理
  * 
  * @author 牟连波
  * @date 2021-04-09
@@ -21,10 +21,10 @@ public class StuServiceImpl implements IStuService
     private StuMapper stuMapper;
 
     /**
-     * 查询学生表
+     * 查询学生管理
      * 
-     * @param stuId 学生表ID
-     * @return 学生表
+     * @param stuId 学生管理ID
+     * @return 学生管理
      */
     @Override
     public Stu selectStuById(Long stuId)
@@ -33,10 +33,10 @@ public class StuServiceImpl implements IStuService
     }
 
     /**
-     * 查询学生表列表
+     * 查询学生管理列表
      * 
-     * @param stu 学生表
-     * @return 学生表
+     * @param stu 学生管理
+     * @return 学生管理
      */
     @Override
     public List<Stu> selectStuList(Stu stu)
@@ -45,9 +45,9 @@ public class StuServiceImpl implements IStuService
     }
 
     /**
-     * 新增学生表
+     * 新增学生管理
      * 
-     * @param stu 学生表
+     * @param stu 学生管理
      * @return 结果
      */
     @Override
@@ -58,9 +58,9 @@ public class StuServiceImpl implements IStuService
     }
 
     /**
-     * 修改学生表
+     * 修改学生管理
      * 
-     * @param stu 学生表
+     * @param stu 学生管理
      * @return 结果
      */
     @Override
@@ -70,9 +70,9 @@ public class StuServiceImpl implements IStuService
     }
 
     /**
-     * 批量删除学生表
+     * 批量删除学生管理
      * 
-     * @param stuIds 需要删除的学生表ID
+     * @param stuIds 需要删除的学生管理ID
      * @return 结果
      */
     @Override
@@ -82,9 +82,9 @@ public class StuServiceImpl implements IStuService
     }
 
     /**
-     * 删除学生表信息
+     * 删除学生管理信息
      * 
-     * @param stuId 学生表ID
+     * @param stuId 学生管理ID
      * @return 结果
      */
     @Override

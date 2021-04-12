@@ -6,7 +6,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 学生表对象 stu
+ * 学生管理对象 stu
  * 
  * @author 牟连波
  * @date 2021-04-09
@@ -38,6 +38,18 @@ public class Stu extends BaseEntity
     @Excel(name = "所属学校ID")
     private Long universityId;
 
+    /** 学校类型 */
+    @Excel(name = "学校类型")
+    private String schoolType;
+
+    /** 毕设名称 */
+    @Excel(name = "毕设名称")
+    private String projectName;
+
+    /** 毕设描述 */
+    @Excel(name = "毕设描述")
+    private String projectDetail;
+
     /** 学生姓名 */
     @Excel(name = "学生姓名")
     private String stuName;
@@ -56,11 +68,11 @@ public class Stu extends BaseEntity
 
     /** 学历 */
     @Excel(name = "学历")
-    private String stuEducation;
+    private Integer stuEducation;
 
     /** 学生状态 */
     @Excel(name = "学生状态")
-    private Long state;
+    private Integer state;
 
     /** 备注 */
     @Excel(name = "备注")
@@ -120,6 +132,33 @@ public class Stu extends BaseEntity
     {
         return universityId;
     }
+    public void setSchoolType(String schoolType) 
+    {
+        this.schoolType = schoolType;
+    }
+
+    public String getSchoolType() 
+    {
+        return schoolType;
+    }
+    public void setProjectName(String projectName) 
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectName() 
+    {
+        return projectName;
+    }
+    public void setProjectDetail(String projectDetail) 
+    {
+        this.projectDetail = projectDetail;
+    }
+
+    public String getProjectDetail() 
+    {
+        return projectDetail;
+    }
     public void setStuName(String stuName) 
     {
         this.stuName = stuName;
@@ -156,21 +195,21 @@ public class Stu extends BaseEntity
     {
         return stuEmail;
     }
-    public void setStuEducation(String stuEducation) 
+    public void setStuEducation(Integer stuEducation) 
     {
         this.stuEducation = stuEducation;
     }
 
-    public String getStuEducation() 
+    public Integer getStuEducation() 
     {
         return stuEducation;
     }
-    public void setState(Long state) 
+    public void setState(Integer state) 
     {
         this.state = state;
     }
 
-    public Long getState() 
+    public Integer getState() 
     {
         return state;
     }
@@ -193,6 +232,9 @@ public class Stu extends BaseEntity
             .append("majorId", getMajorId())
             .append("collegeId", getCollegeId())
             .append("universityId", getUniversityId())
+            .append("schoolType", getSchoolType())
+            .append("projectName", getProjectName())
+            .append("projectDetail", getProjectDetail())
             .append("stuName", getStuName())
             .append("stuPhone", getStuPhone())
             .append("stuQq", getStuQq())

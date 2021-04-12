@@ -11,6 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="majorId"    column="major_id"    />
         <result property="collegeId"    column="college_id"    />
         <result property="universityId"    column="university_id"    />
+        <result property="schoolType"    column="school_type"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectDetail"    column="project_detail"    />
         <result property="stuName"    column="stu_name"    />
         <result property="stuPhone"    column="stu_phone"    />
         <result property="stuQq"    column="stu_qq"    />
@@ -22,16 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectStuVo">
-        select stu_id, stu_number, class_id, major_id, college_id, university_id, stu_name, stu_phone, stu_qq, stu_email, stu_education, create_time, state, remarks from stu
+        select stu_id, stu_number, class_id, major_id, college_id, university_id, school_type, project_name, project_detail, stu_name, stu_phone, stu_qq, stu_email, stu_education, create_time, state, remarks from stu
     </sql>
 
     <select id="selectStuList" parameterType="Stu" resultMap="StuResult">
         <include refid="selectStuVo"/>
         <where>  
-            <if test="stuNumber != null  and stuNumber != ''"> and stu_number like concat('%', #{stuNumber}, '%')</if>
+            <if test="stuNumber != null  and stuNumber != ''"> and stu_number = #{stuNumber}</if>
             <if test="stuName != null  and stuName != ''"> and stu_name like concat('%', #{stuName}, '%')</if>
             <if test="stuPhone != null  and stuPhone != ''"> and stu_phone like concat('%', #{stuPhone}, '%')</if>
-            <if test="stuQq != null  and stuQq != ''"> and stu_qq like concat('%', #{stuQq}, '%')</if>
         </where>
     </select>
     
@@ -48,11 +50,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="majorId != null">major_id,</if>
             <if test="collegeId != null">college_id,</if>
             <if test="universityId != null">university_id,</if>
+            <if test="schoolType != null and schoolType != ''">school_type,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectDetail != null">project_detail,</if>
             <if test="stuName != null and stuName != ''">stu_name,</if>
             <if test="stuPhone != null and stuPhone != ''">stu_phone,</if>
-            <if test="stuQq != null and stuQq != ''">stu_qq,</if>
+            <if test="stuQq != null">stu_qq,</if>
             <if test="stuEmail != null">stu_email,</if>
-            <if test="stuEducation != null and stuEducation != ''">stu_education,</if>
+            <if test="stuEducation != null">stu_education,</if>
             <if test="createTime != null">create_time,</if>
             <if test="state != null">state,</if>
             <if test="remarks != null">remarks,</if>
@@ -63,11 +68,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="majorId != null">#{majorId},</if>
             <if test="collegeId != null">#{collegeId},</if>
             <if test="universityId != null">#{universityId},</if>
+            <if test="schoolType != null and schoolType != ''">#{schoolType},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectDetail != null">#{projectDetail},</if>
             <if test="stuName != null and stuName != ''">#{stuName},</if>
             <if test="stuPhone != null and stuPhone != ''">#{stuPhone},</if>
-            <if test="stuQq != null and stuQq != ''">#{stuQq},</if>
+            <if test="stuQq != null">#{stuQq},</if>
             <if test="stuEmail != null">#{stuEmail},</if>
-            <if test="stuEducation != null and stuEducation != ''">#{stuEducation},</if>
+            <if test="stuEducation != null">#{stuEducation},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="state != null">#{state},</if>
             <if test="remarks != null">#{remarks},</if>
@@ -82,11 +90,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="majorId != null">major_id = #{majorId},</if>
             <if test="collegeId != null">college_id = #{collegeId},</if>
             <if test="universityId != null">university_id = #{universityId},</if>
+            <if test="schoolType != null and schoolType != ''">school_type = #{schoolType},</if>
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="projectDetail != null">project_detail = #{projectDetail},</if>
             <if test="stuName != null and stuName != ''">stu_name = #{stuName},</if>
             <if test="stuPhone != null and stuPhone != ''">stu_phone = #{stuPhone},</if>
-            <if test="stuQq != null and stuQq != ''">stu_qq = #{stuQq},</if>
+            <if test="stuQq != null">stu_qq = #{stuQq},</if>
             <if test="stuEmail != null">stu_email = #{stuEmail},</if>
-            <if test="stuEducation != null and stuEducation != ''">stu_education = #{stuEducation},</if>
+            <if test="stuEducation != null">stu_education = #{stuEducation},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="state != null">state = #{state},</if>
             <if test="remarks != null">remarks = #{remarks},</if>
