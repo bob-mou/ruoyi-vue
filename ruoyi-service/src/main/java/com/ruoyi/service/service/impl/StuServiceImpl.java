@@ -130,11 +130,10 @@ public class StuServiceImpl implements IStuService
         for (Stu stu : userList)
         {
             String password = String.valueOf(stu.getStuQq());
-            String name = stu.getStuName();
             try
             {
                 // 验证是否存在这个用户
-                Stu u = stuMapper.selectStuByName(name);
+                Stu u = stuMapper.selectStuByNum(stu.getStuNumber());
                 if (StringUtils.isNull(u))
                 {
                     SysUser user  = new SysUser();
@@ -167,10 +166,35 @@ public class StuServiceImpl implements IStuService
                 }
                 else if (updateSupport)
                 {
+                    stu.setStuId(u.getStuId());
+                    SysUser user  = new SysUser();
+                    University university = new University();
+                    university.setUniversityName(stu.getUniversityName());
+                    College college = new College();
+                    college.setCollegeName(stu.getCollegeName());
+                    Major major = new Major();
+                    major.setMajorName(stu.getMajorName());
+                    myClass c = new myClass();
+                    c.setClassName(stu.getClassName());
+                    user.setPassword(SecurityUtils.encryptPassword(password));
+                    user.setUserName(stu.getStuName());
+                    user.setNickName(stu.getStuName());
+                    userMapper.insertUser(user);
+                    long uid = universityMapper.selectUniversityList(university).get(0).getUniversityId();
+                    college.setUniversityId(uid);
+                    long cid = collegeMapper.selectCollegeList(college).get(0).getCollegeId();
+                    major.setCollegeId(cid);
+                    long mid = majorMapper.selectMajorList(major).get(0).getMajorId();
+                    c.setMajorId(mid);
+                    long id = classMapper.selectmyClassList(c).get(0).getClassId();
+                    stu.setUniversityId(uid);
+                    stu.setCollegeId(cid);
+                    stu.setMajorId(mid);
+                    stu.setClassId(id);
                     stu.setUpdateBy(operName);
                     stuMapper.updateStu(stu);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、姓名 " + stu.getStuName() + " 更新成功");
+                    successMsg.append("<br/>" + successNum + "、学号 " + stu.getStuNumber() + " 更新成功");
                 }
                 else
                 {

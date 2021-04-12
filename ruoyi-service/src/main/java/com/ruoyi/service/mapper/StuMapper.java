@@ -60,4 +60,6 @@ public interface StuMapper
     public int deleteStuByIds(Long[] stuIds);
 
     public Stu selectStuByName(String stuName);
+
+    public Stu selectStuByNum(String stuNumber);
 }

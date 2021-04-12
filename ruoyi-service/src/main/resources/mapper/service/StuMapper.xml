@@ -42,9 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where stu_id = #{stuId}
     </select>
 
-    <select id="selectStuByName" parameterType="Stu" resultMap="StuResult">
+    <select id="selectStuByNum" parameterType="Stu" resultMap="StuResult">
         <include refid="selectStuVo"/>
-        where stu_name = #{stuName}
+        where stu_number = #{stuNumber}
     </select>
 
     <insert id="insertStu" parameterType="Stu" useGeneratedKeys="true" keyProperty="stuId">
@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stuPhone != null and stuPhone != ''">stu_phone = #{stuPhone},</if>
             <if test="stuQq != null">stu_qq = #{stuQq},</if>
             <if test="stuEmail != null">stu_email = #{stuEmail},</if>
-            <if test="stuEducation != null">stu_education = #{stuEducation},</if>
+            <if test="stuEducation != null and stuEducation != ''">stu_education = #{stuEducation},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="state != null">state = #{state},</if>
             <if test="remarks != null">remarks = #{remarks},</if>
