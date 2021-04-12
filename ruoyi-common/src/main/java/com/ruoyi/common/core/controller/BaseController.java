@@ -20,7 +20,7 @@ import com.ruoyi.common.utils.sql.SqlUtil;
 
 /**
  * web层通用数据处理
- * 
+ *
  * @author ruoyi
  */
 public class BaseController
@@ -75,7 +75,7 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
      * @param rows 影响行数
      * @return 操作结果
      */
@@ -86,7 +86,25 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
+     * @param rows 影响行数
+     * @return 操作结果
+     */
+    protected AjaxResult addusertoAjax(int rows)
+    {
+        if(rows==-1){
+            return AjaxResult.error("操作失败，学生表数据已存在");
+        }
+        else if(rows==0){
+            return AjaxResult.error("操作失败，用户表已存在当前用户");
+        }
+        else{
+            return rows > 0 ? AjaxResult.success() : AjaxResult.error();
+        }
+    }
+    /**
+     * 响应返回结果
+     *
      * @param result 结果
      * @return 操作结果
      */

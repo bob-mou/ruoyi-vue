@@ -22,7 +22,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 学校管理Controller
- * 
+ *
  * @author ruoyi
  * @date 2021-04-09
  */
@@ -44,7 +44,6 @@ public class UniversityController extends BaseController
         List<University> list = universityService.selectUniversityList(university);
         return getDataTable(list);
     }
-
     /**
      * 导出学校管理列表
      */

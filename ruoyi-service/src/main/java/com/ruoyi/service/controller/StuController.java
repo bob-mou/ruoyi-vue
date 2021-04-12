@@ -5,6 +5,8 @@ import java.util.List;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.framework.web.service.TokenService;
+import com.ruoyi.service.domain.*;
+import com.ruoyi.service.service.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,6 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.service.domain.Stu;
-import com.ruoyi.service.service.IStuService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +39,14 @@ public class StuController extends BaseController
     private IStuService stuService;
     @Autowired
     private TokenService tokenService;
-
+    @Autowired
+    private ICollegeService collegeService;
+    @Autowired
+    private IUniversityService universityService;
+    @Autowired
+    private IMajorService majorService;
+    @Autowired
+    private ImyClassService myClassService;
     /**
      * 查询学生表列表
      */
@@ -49,9 +56,49 @@ public class StuController extends BaseController
     {
         startPage();
         List<Stu> list = stuService.selectStuList(stu);
+        if(list.size()>0){
+            for(Stu s:list){
+                s.setUniversityName(universityService.selectUniversityById(s.getUniversityId()).getUniversityName());
+                s.setCollegeName(collegeService.selectCollegeById(s.getCollegeId()).getCollegeName());
+                s.setMajorName(majorService.selectMajorById(s.getMajorId()).getMajorName());
+                s.setClassName(myClassService.selectmyClassById(s.getClassId()).getClassName());
+            }
+        }
         return getDataTable(list);
     }
-
+    //获取所有学校
+    @PreAuthorize("@ss.hasPermi('service:stu:list')")
+    @GetMapping("/alluniversitylist")
+    public List<University> list()
+    {
+        University university=new University();
+        List<University> list = universityService.selectUniversityList(university);
+        return list;
+    }
+    //获取学校的所有学院
+    @PreAuthorize("@ss.hasPermi('service:stu:list')")
+    @GetMapping("/allcollegelist")
+    public List<College> collegelist(College college)
+    {
+        List<College> list = collegeService.selectCollegeList(college);
+        return list;
+    }
+    //获取学院的所有专业
+    @PreAuthorize("@ss.hasPermi('service:stu:list')")
+    @GetMapping("/allmajorlist")
+    public List<Major> majorlist(Major major)
+    {
+        List<Major> list = majorService.selectMajorList(major);
+        return list;
+    }
+    //获取专业的所有班级
+    @PreAuthorize("@ss.hasPermi('service:stu:list')")
+    @GetMapping("/allclasslist")
+    public List<myClass> classlist(myClass myClass)
+    {
+        List<myClass> list = myClassService.selectmyClassList(myClass);
+        return list;
+    }
     /**
      * 导出学生表列表
      */
@@ -72,7 +119,12 @@ public class StuController extends BaseController
     @GetMapping(value = "/{stuId}")
     public AjaxResult getInfo(@PathVariable("stuId") Long stuId)
     {
-        return AjaxResult.success(stuService.selectStuById(stuId));
+        Stu student=stuService.selectStuById(stuId);
+        student.setUniversityName(universityService.selectUniversityById(student.getUniversityId()).getUniversityName());
+        student.setCollegeName(collegeService.selectCollegeById(student.getCollegeId()).getCollegeName());
+        student.setMajorName(majorService.selectMajorById(student.getMajorId()).getMajorName());
+        student.setClassName(myClassService.selectmyClassById(student.getClassId()).getClassName());
+        return AjaxResult.success(student);
     }
 
     /**
@@ -83,7 +135,7 @@ public class StuController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Stu stu)
     {
-        return toAjax(stuService.insertStu(stu));
+        return addusertoAjax(stuService.insertStu(stu));
     }
 
     /**

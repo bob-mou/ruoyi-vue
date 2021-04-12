@@ -10,6 +10,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.service.domain.*;
 import com.ruoyi.service.mapper.*;
 import com.ruoyi.service.service.ISysConfigService;
+import com.ruoyi.service.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class StuServiceImpl implements IStuService
     @Autowired
     private ISysConfigService configService;
     @Autowired
-    private SysUserMapper userMapper;
+    private ISysUserService iSysUserService;
     @Autowired
     private UniversityMapper universityMapper;
     @Autowired
@@ -78,7 +79,34 @@ public class StuServiceImpl implements IStuService
     public int insertStu(Stu stu)
     {
         stu.setCreateTime(DateUtils.getNowDate());
-        return stuMapper.insertStu(stu);
+        //查看学生表是否有数据
+        Stu u = stuMapper.selectStuByNum(stu.getStuNumber());
+        //查看用户表是否有当前用户
+        SysUser suser=iSysUserService.selectUserByUserName(stu.getStuNumber());
+        //插入成功
+        if(StringUtils.isNull(u)&&StringUtils.isNull(suser)){
+            SysUser user=new SysUser();
+            user.setUserName(stu.getStuNumber());
+            user.setNickName(stu.getStuName());
+            user.setRoleIds(new Long[]{3l});
+            user.setEmail(stu.getStuEmail());
+            user.setPhonenumber(stu.getStuPhone());
+            String password = String.valueOf(stu.getStuPhone()).substring(5);
+            user.setPassword(SecurityUtils.encryptPassword(password));
+            int rows=stuMapper.insertStu(stu);
+            //学生表插入失败
+            if(rows==0){
+                return -1;
+            }
+            int row=iSysUserService.insertUser(user);
+            //用户表插入失败
+            if(row==0){
+                return 0;
+            }
+            return 1;
+        }
+        //插入失败
+        return 0;
     }
 
     /**
@@ -129,7 +157,7 @@ public class StuServiceImpl implements IStuService
         StringBuilder failureMsg = new StringBuilder();
         for (Stu stu : userList)
         {
-            String password = String.valueOf(stu.getStuQq());
+            String password = String.valueOf(stu.getStuPhone()).substring(5);
             try
             {
                 // 验证是否存在这个用户
@@ -146,9 +174,10 @@ public class StuServiceImpl implements IStuService
                     myClass c = new myClass();
                     c.setClassName(stu.getClassName());
                     user.setPassword(SecurityUtils.encryptPassword(password));
-                    user.setUserName(stu.getStuName());
+                    user.setUserName(stu.getStuNumber());
                     user.setNickName(stu.getStuName());
-                    userMapper.insertUser(user);
+                    user.setEmail(stu.getStuEmail());
+                    user.setPhonenumber(stu.getStuPhone());
                     long uid = universityMapper.selectUniversityList(university).get(0).getUniversityId();
                     college.setUniversityId(uid);
                     long cid = collegeMapper.selectCollegeList(college).get(0).getCollegeId();
@@ -161,6 +190,9 @@ public class StuServiceImpl implements IStuService
                     stu.setMajorId(mid);
                     stu.setClassId(id);
                     stuMapper.insertStu(stu);
+                    //为学生用户分配角色
+                    user.setRoleIds(new Long[]{3l});
+                    iSysUserService.insertUser(user);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、姓名 " + stu.getStuName() + " 导入成功");
                 }
@@ -179,7 +211,7 @@ public class StuServiceImpl implements IStuService
                     user.setPassword(SecurityUtils.encryptPassword(password));
                     user.setUserName(stu.getStuName());
                     user.setNickName(stu.getStuName());
-                    userMapper.insertUser(user);
+                    iSysUserService.insertUser(user);
                     long uid = universityMapper.selectUniversityList(university).get(0).getUniversityId();
                     college.setUniversityId(uid);
                     long cid = collegeMapper.selectCollegeList(college).get(0).getCollegeId();
