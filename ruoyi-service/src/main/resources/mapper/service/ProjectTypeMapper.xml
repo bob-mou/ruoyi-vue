@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.service.mapper.ProjectTypeMapper">
-    
+
     <resultMap type="ProjectType" id="ProjectTypeResult">
         <result property="projectTypeId"    column="project_type_id"    />
         <result property="projectTypeName"    column="project_type_name"    />
@@ -25,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createDate"    column="create_date"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
+        <result property="state"    column="pstate"    />
+        <result property="remarks"    column="premarks"    />
     </resultMap>
 
     <sql id="selectProjectTypeVo">
@@ -33,21 +35,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectProjectTypeList" parameterType="ProjectType" resultMap="ProjectTypeResult">
         <include refid="selectProjectTypeVo"/>
-        <where>  
+        <where>
             <if test="projectTypeName != null  and projectTypeName != ''"> and project_type_name like concat('%', #{projectTypeName}, '%')</if>
             <if test="createDate != null "> and create_date = #{createDate}</if>
             <if test="state != null "> and state = #{state}</if>
         </where>
     </select>
-    
+
     <select id="selectProjectTypeById" parameterType="Long" resultMap="ProjectTypeProjectResult">
         select a.project_type_id, a.project_type_name, a.create_date, a.state, a.remarks,
-            b.project_id, b.project_type_id, b.project_name, b.project_detail, b.project_tech, b.create_date, b.state, b.remarks
+            b.project_id, b.project_type_id, b.project_name, b.project_detail, b.project_tech, b.create_date, b.state as pstate, b.remarks as premarks
         from project_type a
         left join project b on b.project_type_id = a.project_type_id
         where a.project_type_id = #{projectTypeId}
     </select>
-        
+
     <insert id="insertProjectType" parameterType="ProjectType" useGeneratedKeys="true" keyProperty="projectTypeId">
         insert into project_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -80,14 +82,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteProjectTypeByIds" parameterType="String">
-        delete from project_type where project_type_id in 
+        delete from project_type where project_type_id in
         <foreach item="projectTypeId" collection="array" open="(" separator="," close=")">
             #{projectTypeId}
         </foreach>
     </delete>
-    
+
     <delete id="deleteProjectByProjectTypeIds" parameterType="String">
-        delete from project where project_type_id in 
+        delete from project where project_type_id in
         <foreach item="projectTypeId" collection="array" open="(" separator="," close=")">
             #{projectTypeId}
         </foreach>

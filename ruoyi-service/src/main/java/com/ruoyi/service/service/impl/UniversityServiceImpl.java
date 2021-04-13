@@ -139,26 +139,26 @@ public class UniversityServiceImpl implements IUniversityService
                     list.add(college);
                 }
             }
-            // 遍历b集合
-            for (int i = 0; i < OcollegeId.size(); i++) {
-                // 默认为true，如果有相等的就置为false，不移除
-                for (int j = 0; j < collegeId.size(); j++) {
-                    if (OcollegeId.get(i) == collegeId.get(j)) {
-                        OcollegeId.remove(i); // 相等则移除
-                    }
-                }
-            }
-            if(OcollegeId.size() > 0){
-                Long [] delcollegeId = new Long[OcollegeId.size()];
-                for(int i=0;i<OcollegeId.size();i++){
-                    delcollegeId[i]=OcollegeId.get(i);
-                }
-                collegeMapper.deleteCollegeByIds(delcollegeId);
-            }
             if (list.size() > 0)
             {
                 universityMapper.batchCollege(list);
             }
+        }
+        // 遍历b集合
+        for (int i = 0; i < OcollegeId.size(); i++) {
+            // 默认为true，如果有相等的就置为false，不移除
+            for (int j = 0; j < collegeId.size(); j++) {
+                if (OcollegeId.get(i) == collegeId.get(j)) {
+                    OcollegeId.remove(i); // 相等则移除
+                }
+            }
+        }
+        if(OcollegeId.size() > 0){
+            Long [] delcollegeId = new Long[OcollegeId.size()];
+            for(int i=0;i<OcollegeId.size();i++){
+                delcollegeId[i]=OcollegeId.get(i);
+            }
+            collegeMapper.deleteCollegeByIds(delcollegeId);
         }
     }
 }
