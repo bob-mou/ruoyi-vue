@@ -148,7 +148,7 @@ public class UniversityServiceImpl implements IUniversityService
         for (int i = 0; i < OcollegeId.size(); i++) {
             // 默认为true，如果有相等的就置为false，不移除
             for (int j = 0; j < collegeId.size(); j++) {
-                if (OcollegeId.get(i) == collegeId.get(j)) {
+                if (OcollegeId.get(i).equals(collegeId.get(j))) {
                     OcollegeId.remove(i); // 相等则移除
                 }
             }

@@ -143,7 +143,7 @@ public class ProjectTypeServiceImpl implements IProjectTypeService
             for (int i = 0; i < OprojectId.size(); i++) {
                 // 默认为true，如果有相等的就置为false，不移除
                 for (int j = 0; j < projectId.size(); j++) {
-                    if (OprojectId.get(i) == projectId.get(j)) {
+                    if (OprojectId.get(i).equals(projectId.get(j))) {
                         OprojectId.remove(i); // 相等则移除
                     }
                 }
