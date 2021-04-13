@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.service.mapper.UniversityMapper">
-    
+
     <resultMap type="University" id="UniversityResult">
         <result property="universityId"    column="university_id"    />
         <result property="universityName"    column="university_name"    />
@@ -33,13 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectUniversityList" parameterType="University" resultMap="UniversityResult">
         <include refid="selectUniversityVo"/>
-        <where>  
+        <where>
             <if test="universityName != null  and universityName != ''"> and university_name like concat('%', #{universityName}, '%')</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
             <if test="state != null "> and state = #{state}</if>
         </where>
     </select>
-    
+
     <select id="selectUniversityById" parameterType="Long" resultMap="UniversityCollegeResult">
         select a.university_id, a.university_name, a.logo_path, a.address, a.create_time, a.state, a.remarks,
             b.college_id, b.college_name, b.university_id, b.create_time, b.state, b.remarks
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join college b on b.university_id = a.university_id
         where a.university_id = #{universityId}
     </select>
-        
+
     <insert id="insertUniversity" parameterType="University" useGeneratedKeys="true" keyProperty="universityId">
         insert into university
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -86,14 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteUniversityByIds" parameterType="String">
-        delete from university where university_id in 
+        delete from university where university_id in
         <foreach item="universityId" collection="array" open="(" separator="," close=")">
             #{universityId}
         </foreach>
     </delete>
-    
+
     <delete id="deleteCollegeByUniversityIds" parameterType="String">
-        delete from college where university_id in 
+        delete from college where university_id in
         <foreach item="universityId" collection="array" open="(" separator="," close=")">
             #{universityId}
         </foreach>
@@ -104,9 +104,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <insert id="batchCollege">
-        insert into college( college_id, college_name, university_id, create_time, state, remarks) values
+        insert into college(college_name, university_id, create_time, state, remarks) values
 		<foreach item="item" index="index" collection="list" separator=",">
-            ( #{item.collegeId}, #{item.collegeName}, #{item.universityId}, #{item.createTime}, #{item.state}, #{item.remarks})
+            (#{item.collegeName}, #{item.universityId}, #{item.createTime}, #{item.state}, #{item.remarks})
         </foreach>
     </insert>
 </mapper>
