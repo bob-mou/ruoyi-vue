@@ -17,6 +17,16 @@ public class Project extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    private String projectTypeName;
+
+    public String getProjectTypeName() {
+        return projectTypeName;
+    }
+
+    public void setProjectTypeName(String projectTypeName) {
+        this.projectTypeName = projectTypeName;
+    }
+
     /** 选题id */
     private Long projectId;
 
