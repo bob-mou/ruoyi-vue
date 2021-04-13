@@ -8,9 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="stuId"    column="stu_id"    />
         <result property="stuNumber"    column="stu_number"    />
         <result property="classId"    column="class_id"    />
+        <result property="className"    column="class_name"    />
         <result property="majorId"    column="major_id"    />
+        <result property="majorName"    column="major_name"    />
         <result property="collegeId"    column="college_id"    />
+        <result property="collegeName"    column="college_name"    />
         <result property="universityId"    column="university_id"    />
+        <result property="universityName"    column="university_Name"    />
         <result property="schoolType"    column="school_type"    />
         <result property="projectName"    column="project_name"    />
         <result property="projectDetail"    column="project_detail"    />
@@ -25,7 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectStuVo">
-        select stu_id, stu_number, class_id, major_id, college_id, university_id, school_type, project_name, project_detail, stu_name, stu_phone, stu_qq, stu_email, stu_education, create_time, state, remarks from stu
+--         select stu_id, stu_number, class_id, major_id, college_id, university_id, school_type, project_name, project_detail, stu_name, stu_phone, stu_qq, stu_email, stu_education, create_time, state, remarks from stu
+    select s.*,u.university_name,c.college_name,m.major_name,cla.class_name from (((stu s join university u on s.university_id=u.university_id ) join college c on s.college_id=c.college_id) join major m on s.major_id=m.major_id) join class cla on s.class_id=cla.class_id
+
     </sql>
 
     <select id="selectStuList" parameterType="Stu" resultMap="StuResult">
@@ -34,10 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="stuNumber != null  and stuNumber != ''"> and stu_number = #{stuNumber}</if>
             <if test="stuName != null  and stuName != ''"> and stu_name like concat('%', #{stuName}, '%')</if>
             <if test="stuPhone != null  and stuPhone != ''"> and stu_phone like concat('%', #{stuPhone}, '%')</if>
-            <if test="universityId != null  and universityId != ''"> and university_id =#{universityId}</if>
-            <if test="collegeId != null  and collegeId != ''"> and college_id =#{collegeId}</if>
-            <if test="majorId != null  and majorId != ''"> and major_id =#{majorId}</if>
-            <if test="classId != null  and classId != ''"> and class_id =#{classId}</if>
+            <if test="universityId != null  and universityId != ''"> and s.university_id =#{universityId}</if>
+            <if test="collegeId != null  and collegeId != ''"> and s.college_id =#{collegeId}</if>
+            <if test="majorId != null  and majorId != ''"> and s.major_id =#{majorId}</if>
+            <if test="classId != null  and classId != ''"> and s.class_id =#{classId}</if>
         </where>
     </select>
 

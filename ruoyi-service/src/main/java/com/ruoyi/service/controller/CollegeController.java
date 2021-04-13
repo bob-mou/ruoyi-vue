@@ -1,6 +1,8 @@
 package com.ruoyi.service.controller;
 
 import java.util.List;
+
+import com.ruoyi.service.service.IUniversityService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 学院管理Controller
- * 
+ *
  * @author 牟连波
  * @date 2021-04-09
  */
@@ -32,6 +34,8 @@ public class CollegeController extends BaseController
 {
     @Autowired
     private ICollegeService collegeService;
+    @Autowired
+    private IUniversityService universityService;
 
     /**
      * 查询学院管理列表

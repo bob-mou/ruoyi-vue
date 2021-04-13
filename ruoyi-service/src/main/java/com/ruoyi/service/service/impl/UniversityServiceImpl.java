@@ -119,14 +119,18 @@ public class UniversityServiceImpl implements IUniversityService
         Long universityId = university.getUniversityId();
         College c = new College();
         c.setUniversityId(universityId);
+        //数据库查询学校所有学院
         List<College> OcollegeList = collegeMapper.selectCollegeList(c);
+        //存放数据库里的college_id
         List<Long> OcollegeId = new ArrayList<>();
+        //存放前端传过来的college_id
         List<Long> collegeId = new ArrayList<>();
         for(College college : OcollegeList){
             OcollegeId.add(college.getCollegeId());
         }
         if (StringUtils.isNotNull(collegeList))
         {
+            //list存放数据库中没有的college对象，用于添加
             List<College> list = new ArrayList<College>();
             for (College college : collegeList)
             {

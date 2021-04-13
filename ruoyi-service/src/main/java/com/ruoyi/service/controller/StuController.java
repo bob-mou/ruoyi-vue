@@ -56,14 +56,6 @@ public class StuController extends BaseController
     {
         startPage();
         List<Stu> list = stuService.selectStuList(stu);
-        if(list.size()>0){
-            for(Stu s:list){
-                s.setUniversityName(universityService.selectUniversityById(s.getUniversityId()).getUniversityName());
-                s.setCollegeName(collegeService.selectCollegeById(s.getCollegeId()).getCollegeName());
-                s.setMajorName(majorService.selectMajorById(s.getMajorId()).getMajorName());
-                s.setClassName(myClassService.selectmyClassById(s.getClassId()).getClassName());
-            }
-        }
         return getDataTable(list);
     }
     //获取所有学校
@@ -120,10 +112,6 @@ public class StuController extends BaseController
     public AjaxResult getInfo(@PathVariable("stuId") Long stuId)
     {
         Stu student=stuService.selectStuById(stuId);
-        student.setUniversityName(universityService.selectUniversityById(student.getUniversityId()).getUniversityName());
-        student.setCollegeName(collegeService.selectCollegeById(student.getCollegeId()).getCollegeName());
-        student.setMajorName(majorService.selectMajorById(student.getMajorId()).getMajorName());
-        student.setClassName(myClassService.selectmyClassById(student.getClassId()).getClassName());
         return AjaxResult.success(student);
     }
 

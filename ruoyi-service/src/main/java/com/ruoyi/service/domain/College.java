@@ -8,7 +8,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 学院管理对象 college
- * 
+ *
  * @author 牟连波
  * @date 2021-04-09
  */
@@ -27,6 +27,7 @@ public class College extends BaseEntity
     @Excel(name = "外键学校ID")
     private Long universityId;
 
+    private String universityName;
     /** 学校状态 */
     @Excel(name = "学校状态")
     private Long state;
@@ -38,48 +39,48 @@ public class College extends BaseEntity
     /** 专业管理信息 */
     private List<Major> majorList;
 
-    public void setCollegeId(Long collegeId) 
+    public void setCollegeId(Long collegeId)
     {
         this.collegeId = collegeId;
     }
 
-    public Long getCollegeId() 
+    public Long getCollegeId()
     {
         return collegeId;
     }
-    public void setCollegeName(String collegeName) 
+    public void setCollegeName(String collegeName)
     {
         this.collegeName = collegeName;
     }
 
-    public String getCollegeName() 
+    public String getCollegeName()
     {
         return collegeName;
     }
-    public void setUniversityId(Long universityId) 
+    public void setUniversityId(Long universityId)
     {
         this.universityId = universityId;
     }
 
-    public Long getUniversityId() 
+    public Long getUniversityId()
     {
         return universityId;
     }
-    public void setState(Long state) 
+    public void setState(Long state)
     {
         this.state = state;
     }
 
-    public Long getState() 
+    public Long getState()
     {
         return state;
     }
-    public void setRemarks(String remarks) 
+    public void setRemarks(String remarks)
     {
         this.remarks = remarks;
     }
 
-    public String getRemarks() 
+    public String getRemarks()
     {
         return remarks;
     }
@@ -94,6 +95,14 @@ public class College extends BaseEntity
         this.majorList = majorList;
     }
 
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -104,6 +113,7 @@ public class College extends BaseEntity
             .append("state", getState())
             .append("remarks", getRemarks())
             .append("majorList", getMajorList())
+            .append("universityName",getUniversityName())
             .toString();
     }
 }
