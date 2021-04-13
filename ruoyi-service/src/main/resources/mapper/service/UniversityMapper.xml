@@ -25,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
+        <result property="state"    column="cstate"    />
+        <result property="remarks"    column="cremarks"    />
     </resultMap>
 
     <sql id="selectUniversityVo">
@@ -42,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectUniversityById" parameterType="Long" resultMap="UniversityCollegeResult">
         select a.university_id, a.university_name, a.logo_path, a.address, a.create_time, a.state, a.remarks,
-            b.college_id, b.college_name, b.university_id, b.create_time, b.state, b.remarks
+            b.college_id, b.college_name, b.university_id, b.create_time, b.state as cstate, b.remarks as cremarks
         from university a
         left join college b on b.university_id = a.university_id
         where a.university_id = #{universityId}

@@ -64,7 +64,8 @@ public class UniversityController extends BaseController
     @GetMapping(value = "/{universityId}")
     public AjaxResult getInfo(@PathVariable("universityId") Long universityId)
     {
-        return AjaxResult.success(universityService.selectUniversityById(universityId));
+        University universities = universityService.selectUniversityById(universityId);
+        return AjaxResult.success(universities);
     }
 
     /**
