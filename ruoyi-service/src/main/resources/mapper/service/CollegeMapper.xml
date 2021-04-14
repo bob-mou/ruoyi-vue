@@ -25,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createDate"    column="create_date"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
+        <result property="state"    column="mstate"    />
+        <result property="remarks"    column="mremarks"    />
     </resultMap>
 
     <sql id="selectCollegeVo">
@@ -43,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectCollegeById" parameterType="Long" resultMap="CollegeMajorResult">
         select a.college_id, a.college_name, a.university_id, a.create_time, a.state, a.remarks,
-            b.major_id, b.major_name, b.college_id, b.create_date, b.state, b.remarks
+            b.major_id, b.major_name, b.college_id, b.create_date, b.state as mstate, b.remarks as mremarks
         from college a
         left join major b on b.college_id = a.college_id
         where a.college_id = #{collegeId}
