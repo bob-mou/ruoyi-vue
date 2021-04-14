@@ -84,4 +84,5 @@ public interface CollegeMapper
      * @return 结果
      */
     public int deleteMajorByMajorId(Long collegeId);
+
 }
