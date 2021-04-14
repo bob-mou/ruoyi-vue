@@ -1,16 +1,16 @@
 package com.ruoyi.service.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import com.ruoyi.common.config.RuoYiConfig;
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.utils.file.FileUploadUtils;
+import com.ruoyi.framework.web.service.TokenService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -19,6 +19,7 @@ import com.ruoyi.service.domain.University;
 import com.ruoyi.service.service.IUniversityService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 学校管理Controller
@@ -32,6 +33,29 @@ public class UniversityController extends BaseController
 {
     @Autowired
     private IUniversityService universityService;
+
+    @Autowired
+    private TokenService tokenService;
+
+    /**
+     * 学校logo
+     */
+    @Log(title = "学校logo", businessType = BusinessType.UPDATE)
+    @PostMapping("/logos")
+    public AjaxResult avatar(@RequestParam("avatarfile") MultipartFile file) throws IOException
+    {
+        if (!file.isEmpty())
+        {
+            LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+//            if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("imgUrl", avatar);
+                tokenService.setLoginUser(loginUser);
+                return ajax;
+        }
+        return AjaxResult.error("上传图片异常，请联系管理员");
+    }
 
     /**
      * 查询学校管理列表
@@ -64,8 +88,7 @@ public class UniversityController extends BaseController
     @GetMapping(value = "/{universityId}")
     public AjaxResult getInfo(@PathVariable("universityId") Long universityId)
     {
-        University universities = universityService.selectUniversityById(universityId);
-        return AjaxResult.success(universities);
+        return AjaxResult.success(universityService.selectUniversityById(universityId));
     }
 
     /**
@@ -100,4 +123,5 @@ public class UniversityController extends BaseController
     {
         return toAjax(universityService.deleteUniversityByIds(universityIds));
     }
+
 }
