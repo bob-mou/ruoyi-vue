@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createDate"    column="create_date"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
+        <result property="state"    column="mstate"    />
+        <result property="remarks"    column="mremarks"    />
     </resultMap>
 
     <resultMap id="MajormyClassResult" type="Major" extends="MajorResult">
@@ -25,6 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="className"    column="class_name"    />
         <result property="majorId"    column="major_id"    />
         <result property="createDate"    column="create_date"    />
+        <result property="state"    column="mystate"    />
+        <result property="remarks"    column="myremarks"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
     </resultMap>
@@ -47,8 +51,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectMajorById" parameterType="Long" resultMap="MajormyClassResult">
-        select a.major_id, a.major_name, a.college_id, a.create_date, a.state, a.remarks,
-            b.class_id, b.class_name, b.major_id, b.create_date, b.state, b.remarks
+        select a.major_id, a.major_name, a.college_id, a.create_date, a.state as mstate, a.remarks as mremarks,
+            b.class_id, b.class_name, b.major_id, b.create_date, b.state as mystate, b.remarks as myremarks
         from major a
         left join class b on b.major_id = a.major_id
         where a.major_id = #{majorId}
