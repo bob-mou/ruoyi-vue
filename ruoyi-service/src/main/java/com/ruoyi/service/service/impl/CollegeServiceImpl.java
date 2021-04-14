@@ -144,7 +144,6 @@ public class CollegeServiceImpl implements ICollegeService
                 }
                 if(flag){
                     majorMapper.deleteMajorById(m.getMajorId());
-                    flag=false;
                 }
             }
             //如果前端传过来的college对象中的majorList中的major_id为空，说明当前major对象应该新增

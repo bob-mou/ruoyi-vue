@@ -3,11 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.service.mapper.MajorMapper">
-    
+
     <resultMap type="Major" id="MajorResult">
         <result property="majorId"    column="major_id"    />
         <result property="majorName"    column="major_name"    />
+        <result property="universityId"    column="university_id"    />
+        <result property="universityName"    column="university_name"    />
         <result property="collegeId"    column="college_id"    />
+        <result property="collegeName"    column="college_name"    />
         <result property="createDate"    column="create_date"    />
         <result property="state"    column="state"    />
         <result property="remarks"    column="remarks"    />
@@ -27,18 +30,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectMajorVo">
-        select major_id, major_name, college_id, create_date, state, remarks from major
+--         select major_id, major_name, college_id, create_date, state, remarks from major
+    select major_id, major_name, col.university_id, university_name, m.college_id, college_name, m.create_date, m.state, m.remarks from (major m join college col on m.college_id=col.college_id)  join
+            university u on col.university_id=u.university_id
+
     </sql>
 
     <select id="selectMajorList" parameterType="Major" resultMap="MajorResult">
         <include refid="selectMajorVo"/>
-        <where>  
+        <where>
+            <if test="universityId != null and universityId != ''"> and col.university_id = #{universityId}</if>
             <if test="majorName != null  and majorName != ''"> and major_name like concat('%', #{majorName}, '%')</if>
-            <if test="collegeId != null "> and college_id = #{collegeId}</if>
-            <if test="state != null "> and state = #{state}</if>
+            <if test="collegeId != null "> and m.college_id = #{collegeId}</if>
+            <if test="state != null "> and m.state = #{state}</if>
         </where>
     </select>
-    
+
     <select id="selectMajorById" parameterType="Long" resultMap="MajormyClassResult">
         select a.major_id, a.major_name, a.college_id, a.create_date, a.state, a.remarks,
             b.class_id, b.class_name, b.major_id, b.create_date, b.state, b.remarks
@@ -46,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join class b on b.major_id = a.major_id
         where a.major_id = #{majorId}
     </select>
-        
+
     <insert id="insertMajor" parameterType="Major" useGeneratedKeys="true" keyProperty="majorId">
         insert into major
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -82,14 +89,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteMajorByIds" parameterType="String">
-        delete from major where major_id in 
+        delete from major where major_id in
         <foreach item="majorId" collection="array" open="(" separator="," close=")">
             #{majorId}
         </foreach>
     </delete>
-    
+
     <delete id="deletemyClassByMajorIds" parameterType="String">
-        delete from class where major_id in 
+        delete from class where major_id in
         <foreach item="majorId" collection="array" open="(" separator="," close=")">
             #{majorId}
         </foreach>

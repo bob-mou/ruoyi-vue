@@ -1,6 +1,8 @@
 package com.ruoyi.service.controller;
 
 import java.util.List;
+
+import com.ruoyi.service.service.ICollegeService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 专业管理Controller
- * 
+ *
  * @author XD
  * @date 2021-04-09
  */
@@ -33,6 +35,8 @@ public class MajorController extends BaseController
     @Autowired
     private IMajorService majorService;
 
+    @Autowired
+    private ICollegeService collegeService;
     /**
      * 查询专业管理列表
      */
@@ -65,7 +69,10 @@ public class MajorController extends BaseController
     @GetMapping(value = "/{majorId}")
     public AjaxResult getInfo(@PathVariable("majorId") Long majorId)
     {
-        return AjaxResult.success(majorService.selectMajorById(majorId));
+        Major major=majorService.selectMajorById(majorId);
+        Long universityId=collegeService.selectCollegeById(major.getCollegeId()).getUniversityId();
+        major.setUniversityId(universityId);
+        return AjaxResult.success(major);
     }
 
     /**

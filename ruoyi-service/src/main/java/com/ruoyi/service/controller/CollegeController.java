@@ -48,6 +48,16 @@ public class CollegeController extends BaseController
         List<College> list = collegeService.selectCollegeList(college);
         return getDataTable(list);
     }
+    /**查询所有的学院
+     *
+     * */
+    @PreAuthorize("@ss.hasPermi('service:collage:list')")
+    @GetMapping("/collegelist")
+    public List<College> collegeList(College college)
+    {
+        List<College> list = collegeService.selectCollegeList(college);
+        return list;
+    }
 
     /**
      * 导出学院管理列表
