@@ -139,26 +139,26 @@ public class ProjectTypeServiceImpl implements IProjectTypeService
                     list.add(project);
                 }
             }
-            // 遍历b集合
-            for (int i = 0; i < OprojectId.size(); i++) {
-                // 默认为true，如果有相等的就置为false，不移除
-                for (int j = 0; j < projectId.size(); j++) {
-                    if (OprojectId.get(i).equals(projectId.get(j))) {
-                        OprojectId.remove(i); // 相等则移除
-                    }
-                }
-            }
-            if(OprojectId.size() > 0){
-                Long [] delcollegeId = new Long[OprojectId.size()];
-                for(int i=0;i<OprojectId.size();i++){
-                    delcollegeId[i]=OprojectId.get(i);
-                }
-                projectMapper.deleteProjectByIds(delcollegeId);
-            }
             if (list.size() > 0)
             {
                 projectTypeMapper.batchProject(list);
             }
+        }
+        // 遍历b集合
+        for (int i = 0; i < OprojectId.size(); i++) {
+            // 默认为true，如果有相等的就置为false，不移除
+            for (int j = 0; j < projectId.size(); j++) {
+                if (OprojectId.get(i).equals(projectId.get(j))) {
+                    OprojectId.remove(i); // 相等则移除
+                }
+            }
+        }
+        if(OprojectId.size() > 0){
+            Long [] delcollegeId = new Long[OprojectId.size()];
+            for(int i=0;i<OprojectId.size();i++){
+                delcollegeId[i]=OprojectId.get(i);
+            }
+            projectMapper.deleteProjectByIds(delcollegeId);
         }
     }
 }
